@@ -1,0 +1,51 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HealthBarController : MonoBehaviour
+{
+    public Slider healthSlider;
+    public Image fillImage;
+    public float maxHealth = 100f;
+    private float currentHealth;
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        healthSlider.value = currentHealth;
+    }
+
+    public void Heal(float healingAmount)
+    {
+        currentHealth += healingAmount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        healthSlider.value = currentHealth;
+    }
+}
+
+public class Player : MonoBehaviour
+{
+    public HealthBarController healthBar;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) // Example: Take damage when space is pressed
+        {
+            //Take certain amount of damage with healthBar.TakeDamage(number);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H)) // Example: Heal when H is pressed
+        {
+            //Heal a determinable amount of health with healthBar.Heal(number);
+        }
+    }
+}
