@@ -1,51 +1,61 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Class to control the health bar UI
 public class HealthBarController : MonoBehaviour
 {
+    // Public variables to assign the slider and fill image components
     public Slider healthSlider;
     public Image fillImage;
     public float maxHealth = 100f;
     private float currentHealth;
 
+    // Initialize health values and slider in the Start method
     void Start()
     {
-        currentHealth = maxHealth;
-        healthSlider.maxValue = maxHealth;
-        healthSlider.value = currentHealth;
+        currentHealth = maxHealth; // Set current health to maximum health
+        healthSlider.maxValue = maxHealth; // Set slider's maximum value
+        healthSlider.value = currentHealth; // Set slider's current value
     }
 
+    // Method to take damage and update the health bar
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        healthSlider.value = currentHealth;
+        currentHealth -= damage; // Decrease current health by the damage amount
+        healthSlider.value = currentHealth; // Update slider's current value
     }
 
+    // Method to heal and update the health bar
     public void Heal(float healingAmount)
     {
-        currentHealth += healingAmount;
+        currentHealth += healingAmount; // Increase current health by the healing amount
         if (currentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            currentHealth = maxHealth; // Cap the current health at maximum health
         }
-        healthSlider.value = currentHealth;
+        healthSlider.value = currentHealth; // Update slider's current value
     }
 }
 
+// Class to handle player input and interact with the health bar
 public class Player : MonoBehaviour
 {
+    // Public variable to assign the HealthBarController component
     public HealthBarController healthBar;
 
+    // Update method to check for player input
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // Example: Take damage when space is pressed
+        // If the space key is pressed, take a certain amount of damage
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Take certain amount of damage with healthBar.TakeDamage(number);
+            // Take a certain amount of damage with healthBar.TakeDamage(number);
         }
 
-        if (Input.GetKeyDown(KeyCode.H)) // Example: Heal when H is pressed
+        // If the H key is pressed, heal a determinable amount of health
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            //Heal a determinable amount of health with healthBar.Heal(number);
+            // Heal a determinable amount of health with healthBar.Heal(number);
         }
     }
 }
